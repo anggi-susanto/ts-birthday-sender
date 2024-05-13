@@ -1,0 +1,406 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Management with Clean Architecture API",
+    "description": "This api is a simple user management with clean architecture",
+    "contact": {
+      "email": "antscpk06@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers":[
+    {
+      "url": "http://localhost:3000/",
+      "description": "API of test"
+    }
+  ],
+  "paths": {
+    "/users":{
+      "post": {
+        "summary": "Register user",
+        "description": "This route will responsible for registering the new user",
+        "tags": ["Users"],
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples":{
+                "user":{
+                  "value":{
+                    "name": "Anggi Susanto",
+                    "email": "antscpk06@gmail.com",
+                    "password": "12345",
+                    "dateOfBirth": "2000-01-01"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "400": {
+            "description": {"error": "User already exists."},
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User already exists."
+                  }
+                }
+              }
+            }
+          },
+          "201":{
+            "description": "Created",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+           }
+        }
+      },
+      "get":{
+        "summary": "Get all users",
+        "description": "This route will be responsible for get  all registered users",
+        "tags": ["Users"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses":{
+          "400": {
+            "description": "No user found",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "No user found"
+                  }
+                }
+              }
+            }
+          },
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "$ref": "#/components/schemas/Pagination"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "summary": "Update user",
+        "description": "This route will responsible for to do the update a user",
+        "tags": ["Users"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User's id for update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples":{
+                "user":{
+                  "value":{
+                    "name": "Anggi Susanto",
+                    "email": "antscpk06@gmail.com",
+                    "password": "12345",
+                    "dateOfBirth": "2000-01-01"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "400": {
+            "description": "User does not exits!",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User does not exits!"
+                  }
+                }
+              }
+            }
+          },
+          "200":{
+            "description": "Updated",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+           }
+        }
+      },
+      "delete":{
+        "summary": "Delete user",
+        "description": "This route will responsible for to do the delete a user",
+        "tags": ["Users"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User's id for delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses":{
+          "400": {
+            "description": "User does not exits!",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User does not exits!"
+                  }
+                }
+              }
+            }
+          },
+          "204":{
+            "description": "Deleted"
+           }
+        }
+      }
+    },
+    "/authenticate/login": {
+      "post": {
+        "summary": "Login user",
+        "description": "This route will responsible for login the user",
+        "tags": ["Authentication"],
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples":{
+                "user":{
+                  "value":{
+                    "email": "antscpk06@gmail.com",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "400": {
+            "description": "User does not exits!",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User does not exits!"
+                  }
+                }
+              }
+            }
+          },
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type":"object",
+                  "$ref": "#/components/schemas/authenticateUser"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components":{
+    "securitySchemes":{
+      "BearerAuth":{
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas":{
+      "User":{
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Login":{
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "authenticateUser": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "object",
+            "$ref": "#/components/schemas/refreshToken"
+          },
+          "user": {
+            "type": "object",
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "refreshToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "number",
+            "format": "integer"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "array"
+          },
+          "total": {
+            "type": "number",
+            "format": "integer"
+
+          },
+          "page": {
+            "type": "number",
+            "format": "integer"
+
+          },
+          "last_page": {
+            "type": "number",
+            "format": "integer"
+
+          }
+        }
+      }
+    }
+  }
+} 
