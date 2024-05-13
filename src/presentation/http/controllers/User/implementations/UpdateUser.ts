@@ -44,13 +44,17 @@ export class UpdateUserController implements IController {
 
       if (
         pathStringParams.includes('id') &&
-        (bodyParams.includes('name') ||
+        (bodyParams.includes('firstName') ||
+          bodyParams.includes('lastName') ||
+          bodyParams.includes('location') ||
           bodyParams.includes('email') ||
           bodyParams.includes('password'))
       ) {
         const id = (httpRequest.path as { id: string }).id
         const data = httpRequest.body as {
-          name: string
+          firstName: string
+          lastName: string
+          location: string
           email: string
           password: string
         }

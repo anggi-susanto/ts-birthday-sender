@@ -21,12 +21,17 @@ describe('User Class', () => {
    */
   it('should create a user instance with provided data', () => {
     const user = new User({
-      name: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
+      location: 'Test Location',
       email: new Email({ address: 'john@example.com' }),
       password: 'password123',
       dateOfBirth: '1990-01-01',
     })
-    expect(user.name).toBe('John Doe')
+    expect(user.firstName).toBe('John')
+    expect(user.lastName).toBe('Doe')
+    expect(user.location).toBe('Test Location')
+    expect(user.dateOfBirth).toBe('1990-01-01')
     expect(user.email.address).toBe('john@example.com')
     expect(user.password).toBe('password123')
   })
@@ -38,13 +43,18 @@ describe('User Class', () => {
    */
   it('should create a new user with the create method', () => {
     const user = User.create({
-      name: 'Jane Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      location: 'Test Location',
       email: 'jane.doe@example.com',
       password: '654321',
       dateOfBirth: '1990-01-01',
     })
 
-    expect(user.name).toBe('Jane Doe')
+    expect(user.firstName).toBe('Jane')
+    expect(user.lastName).toBe('Doe')
+    expect(user.location).toBe('Test Location')
+    expect(user.dateOfBirth).toBe('1990-01-01')
     expect(user.email.address).toBe('jane.doe@example.com')
     expect(user.password).toBe('654321')
   })

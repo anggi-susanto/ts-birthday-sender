@@ -36,7 +36,7 @@ export class UpdateUserUseCase implements IUpdateUserUseCase {
    */
   async execute(
     userId: string,
-    { name, email, password }: IUpdateUserRequestDTO,
+    { firstName, lastName, location, email, password }: IUpdateUserRequestDTO,
   ): Promise<ResponseDTO> {
     try {
       const userAlreadyExists = (await this.userRepository.findById(
@@ -54,9 +54,17 @@ export class UpdateUserUseCase implements IUpdateUserUseCase {
         password = await this.passwordHasher.hashPassword(password)
       }
 
-      const userEntity = User.update({ name, email, password })
+      const userEntity = User.update({
+        firstName,
+        lastName,
+        location,
+        email,
+        password,
+      })
       const userUpdated = await this.userRepository.update(userAlreadyExists, {
-        name: userEntity.name,
+        firstName: userEntity.firstName,
+        lastName: userEntity.lastName,
+        location: userEntity.location,
         email: userEntity.email,
         password: userEntity.password,
       })

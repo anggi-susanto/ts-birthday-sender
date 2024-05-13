@@ -63,13 +63,19 @@ describe('UpdateUserUseCase', () => {
     const existingUser = {
       id: '123',
       email: 'existing@example.com',
-      name: 'Existing User',
+      firstName: 'Existing',
+      lastName: 'User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
       password: 'existingpassword',
     }
 
     const updateUserRequestDTO: IUpdateUserRequestDTO = {
       email: 'newuser@example.com',
-      name: 'New User',
+      firstName: 'New',
+      lastName: 'User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
       password: 'newpassword',
     }
     userRepository.findById = vi
@@ -83,7 +89,9 @@ describe('UpdateUserUseCase', () => {
     await updateUserUseCase.execute(userId, existingUser)
 
     expect(userRepository.update).toHaveBeenCalledWith(updateUserRequestDTO, {
-      name: existingUser.name,
+      firstName: existingUser.firstName,
+      lastName: existingUser.lastName,
+      location: existingUser.location,
       email: existingUser.email,
       password: existingUser.password,
     })
@@ -99,7 +107,10 @@ describe('UpdateUserUseCase', () => {
     const updateUserRequestDTO: IUpdateUserRequestDTO = {
       id: '123',
       email: 'test@example.com',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
       password: 'password',
     }
 
@@ -119,13 +130,19 @@ describe('UpdateUserUseCase', () => {
     const existingUser = {
       id: '123',
       email: 'existing@example.com',
-      name: 'Existing User',
+      firstName: 'Existing',
+      lastName: 'User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
       password: 'existingpassword',
     }
     const updateUserRequestDTO: IUpdateUserRequestDTO = {
       id: '123',
       email: 'invalid email',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
       password: 'password',
     }
 

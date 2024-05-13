@@ -59,14 +59,18 @@ describe('GetAllUserUseCase', () => {
     const users: IUserOutRequestDTO[] = [
       {
         id: '1',
-        name: 'John Doe',
+        firstName: 'John',
+        lastName: 'Doe',
+        location: 'New York, USA',
         email: 'johndoe@example.com',
         createdAt: new Date(),
         dateOfBirth: new Date().toDateString(),
       },
       {
         id: '2',
-        name: 'Jane Doe',
+        firstName: 'Jane',
+        lastName: 'Doe',
+        location: 'New York, USA',
         email: 'janedoe@example.com',
         createdAt: new Date(),
         dateOfBirth: new Date().toDateString(),

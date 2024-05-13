@@ -29,7 +29,9 @@ describe('GetUserRouters', () => {
     userData = {
       password: '123456',
       email: 'testGet@test.com.br',
-      name: 'Test Integration Exist User',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
       dateOfBirth: '1990-01-01',
     }
 

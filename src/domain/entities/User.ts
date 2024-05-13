@@ -8,7 +8,9 @@ import { Email } from '../valueObjects/Email'
  * @interface
  */
 export interface UserInterface {
-  name: string
+  firstName: string
+  lastName: string
+  location: string
   email: Email
   password: string
   dateOfBirth: string
@@ -20,7 +22,9 @@ export interface UserInterface {
  * @class
  */
 export class User {
-  private _name: string
+  private _firstName: string
+  private _lastName: string
+  private _location: string
   private _email: Email
   private _password: string
   private _dateOfBirth: string
@@ -34,12 +38,21 @@ export class User {
    */
   static create({
     email,
-    name,
+    firstName,
+    lastName,
+    location,
     password,
     dateOfBirth,
   }: ICreateUserRequestDTO): User {
     const newEmail = new Email({ address: email })
-    return new User({ name, email: newEmail, password, dateOfBirth })
+    return new User({
+      firstName,
+      lastName,
+      location,
+      email: newEmail,
+      password,
+      dateOfBirth,
+    })
   }
 
   /**
@@ -57,12 +70,30 @@ export class User {
   }
 
   /**
-   * Gets the user's name.
+   * Gets the user's first name.
    *
    * @readonly
    */
-  get name(): string {
-    return this._name
+  get firstName(): string {
+    return this._firstName
+  }
+
+  /**
+   * Gets the user's last name.
+   *
+   * @readonly
+   */
+  get lastName(): string {
+    return this._lastName
+  }
+
+  /**
+   * Gets the user's location.
+   *
+   * @readonly
+   */
+  get location(): string {
+    return this._location
   }
 
   /**
@@ -100,7 +131,9 @@ export class User {
    * @param {UserInterface} props - The properties of the user.
    */
   constructor(props: UserInterface) {
-    this._name = props.name
+    this._firstName = props.firstName
+    this._lastName = props.lastName
+    this._location = props.location
     this._password = props.password
     this._email = props.email
     this._dateOfBirth = props.dateOfBirth

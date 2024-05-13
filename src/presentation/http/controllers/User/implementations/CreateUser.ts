@@ -38,13 +38,17 @@ export class CreateUserController implements IController {
       const bodyParams = Object.keys(httpRequest.body)
 
       if (
-        bodyParams.includes('name') &&
+        bodyParams.includes('firstName') &&
+        bodyParams.includes('lastName') &&
+        bodyParams.includes('location') &&
         bodyParams.includes('email') &&
         bodyParams.includes('password')
       ) {
         // Extract user creation data from the request body
         const createUserRequestDTO = httpRequest.body as {
-          name: string
+          firstName: string
+          lastName: string
+          location: string
           email: string
           password: string
           dateOfBirth: string

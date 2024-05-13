@@ -34,14 +34,18 @@ export class CreateUserUseCase implements ICreateUserUseCase {
    */
   async execute({
     email,
-    name,
+    firstName,
+    lastName,
+    location,
     password,
     dateOfBirth,
   }: ICreateUserRequestDTO): Promise<ResponseDTO> {
     try {
       const userEntity = User.create({
         email,
-        name,
+        firstName,
+        lastName,
+        location,
         password,
         dateOfBirth,
       })
@@ -60,7 +64,9 @@ export class CreateUserUseCase implements ICreateUserUseCase {
       const passwordHashed = await this.passwordHasher.hashPassword(password)
       const user = await this.userRepository.create({
         email: userEntity.email.address,
-        name: userEntity.name,
+        firstName: userEntity.firstName,
+        lastName: userEntity.lastName,
+        location: userEntity.location,
         password: passwordHashed,
         dateOfBirth: '1990-01-01',
       })

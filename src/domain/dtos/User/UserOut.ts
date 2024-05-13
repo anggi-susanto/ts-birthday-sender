@@ -10,9 +10,19 @@ export interface IUserOutRequestDTO {
   id: string
 
   /**
-   * The name of the user.
+   * The first name of the user.
    */
-  name: string
+  firstName: string
+
+  /**
+   * The last name of the user.
+   */
+  lastName: string
+
+  /**
+   * The location of the user
+   */
+  location: string
 
   /**
    * The email address of the user.

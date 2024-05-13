@@ -31,21 +31,27 @@ export class UserRepository implements IUsersRepository {
    */
   async create({
     email,
-    name,
+    firstName,
+    lastName,
+    location,
     password,
     dateOfBirth,
   }: ICreateUserRequestDTO): Promise<IUserOutRequestDTO> {
     const user = await this.prisma.user.create({
       data: {
         email,
-        name,
+        firstName,
+        lastName,
+        location,
         password,
         dateOfBirth,
       },
       select: {
         id: true,
         email: true,
-        name: true,
+        firstName: true,
+        lastName: true,
+        location: true,
         createdAt: true,
         dateOfBirth: true,
       },
@@ -67,7 +73,9 @@ export class UserRepository implements IUsersRepository {
       select: {
         id: true,
         email: true,
-        name: true,
+        firstName: true,
+        lastName: true,
+        location: true,
         password: true,
         createdAt: true,
       },
@@ -89,7 +97,9 @@ export class UserRepository implements IUsersRepository {
       select: {
         id: true,
         email: true,
-        name: true,
+        firstName: true,
+        lastName: true,
+        location: true,
         password: true,
         createdAt: true,
         dateOfBirth: true,
@@ -112,12 +122,14 @@ export class UserRepository implements IUsersRepository {
       take: perPage,
       skip: Math.ceil((pageNumber - 1) * perPage),
       orderBy: {
-        name: 'asc',
+        createdAt: 'asc',
       },
       select: {
         id: true,
         email: true,
-        name: true,
+        firstName: true,
+        lastName: true,
+        location: true,
         createdAt: true,
         dateOfBirth: true,
       },
@@ -143,7 +155,7 @@ export class UserRepository implements IUsersRepository {
    */
   async update(
     user: IUserOutRequestDTO,
-    { email, name, password }: IUpdateUserRequestDTO,
+    { email, firstName, lastName, location, password }: IUpdateUserRequestDTO,
   ): Promise<IUserOutRequestDTO> {
     const userUpdated = await this.prisma.user.update({
       where: {
@@ -151,7 +163,9 @@ export class UserRepository implements IUsersRepository {
       },
       data: {
         email,
-        name,
+        firstName,
+        lastName,
+        location,
         password,
       },
     })

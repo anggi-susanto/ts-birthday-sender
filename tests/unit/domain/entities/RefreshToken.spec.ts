@@ -17,7 +17,9 @@ import { Email } from '../../../../src/domain/valueObjects/Email'
 describe('RefreshToken', () => {
   // Create a user instance for testing
   const user = new User({
-    name: 'John Doe',
+    firstName: 'John',
+    lastName: 'Doe',
+    location: 'Test Location',
     email: new Email({ address: 'john@example.com' }),
     password: 'password123',
     dateOfBirth: '1990-01-01',

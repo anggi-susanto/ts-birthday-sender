@@ -22,7 +22,9 @@ describe('RefreshTokenPrismaRepository', () => {
 
   const userData = {
     email: 'test@example.com',
-    name: 'Test User',
+    firstName: 'Test',
+    lastName: 'User',
+    location: 'Test Location',
     password: 'password',
     dateOfBirth: '1990-01-01',
   }

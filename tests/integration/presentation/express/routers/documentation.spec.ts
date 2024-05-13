@@ -18,7 +18,9 @@ describe('UserPrismaRepository', () => {
   let userRepository: IUsersRepository
   const userData = {
     email: 'test@example.com',
-    name: 'Test User',
+    firstName: 'Test Integration',
+    lastName: 'Exist User',
+    location: 'Test Location',
     password: 'password',
     dateOfBirth: '1990-01-01',
   }
@@ -41,7 +43,10 @@ describe('UserPrismaRepository', () => {
   it('create method should create a user', async () => {
     const createdUser = await userRepository.create(userData)
     expect(createdUser.email).toEqual(userData.email)
-    expect(createdUser.name).toEqual(userData.name)
+    expect(createdUser.firstName).toEqual(userData.firstName)
+    expect(createdUser.lastName).toEqual(userData.lastName)
+    expect(createdUser.location).toEqual(userData.location)
+    expect(createdUser.dateOfBirth).toEqual(userData.dateOfBirth)
   })
 
   /**
@@ -97,7 +102,9 @@ describe('UserPrismaRepository', () => {
       select: {
         id: true,
         email: true,
-        name: true,
+        firstName: true,
+        lastName: true,
+        location: true,
         createdAt: true,
         dateOfBirth: true,
       },
@@ -118,11 +125,17 @@ describe('UserPrismaRepository', () => {
   it('update method should update a user by id', async () => {
     const createdUser = await prisma.user.create({ data: userData })
     const user = await userRepository.update(createdUser, {
-      name: 'New User',
+      firstName: 'New User',
+      lastName: 'Updated',
+      location: 'Updated Location',
+      dateOfBirth: '1990-01-01',
       password: '123',
     })
 
-    expect(user.name).toEqual('New User')
+    expect(user.firstName).toEqual('New User')
+    expect(user.lastName).toEqual('Updated')
+    expect(user.location).toEqual('Updated Location')
+    expect(user.dateOfBirth).toEqual('1990-01-01')
   })
 
   /**

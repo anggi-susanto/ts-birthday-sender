@@ -61,7 +61,9 @@ describe('CreateUserUseCase', () => {
   it('should create a new user', async () => {
     const createUserRequestDTO: ICreateUserRequestDTO = {
       email: 'test@example.com',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
       password: 'password',
       dateOfBirth: '1990-01-01',
     }
@@ -97,7 +99,9 @@ describe('CreateUserUseCase', () => {
   it('should throw an error if user already exists', async () => {
     const createUserRequestDTO: ICreateUserRequestDTO = {
       email: 'test@example.com',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
       password: 'password',
       dateOfBirth: '1990-01-01',
     }
@@ -117,7 +121,9 @@ describe('CreateUserUseCase', () => {
   it('should throw an error if email is invalid', async () => {
     const createUserRequestDTO: ICreateUserRequestDTO = {
       email: 'invalid email',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
       password: 'password',
       dateOfBirth: '1990-01-01',
     }

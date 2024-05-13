@@ -19,7 +19,9 @@ describe('UserRouter', () => {
   const userData: ICreateUserRequestDTO = {
     password: '123456',
     email: 'testDelete@test.com.br',
-    name: 'Test Integration Exist User',
+    firstName: 'Test Integration',
+    lastName: 'Exist User',
+    location: 'Test Location',
     dateOfBirth: '1990-01-01',
   }
   let authToken: any

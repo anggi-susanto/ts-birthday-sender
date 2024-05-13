@@ -52,7 +52,9 @@ describe('CreateUserController', () => {
   it('should return 201 response on successful user creation', async () => {
     const createUserRequestDTO: ICreateUserRequestDTO = {
       email: 'test@example.com',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
       password: 'password',
       dateOfBirth: '1990-01-01',
     }
@@ -105,7 +107,9 @@ describe('CreateUserController', () => {
   it('should return 400 response if user creation encounters duplicate user', async () => {
     const createUserRequestDTO: ICreateUserRequestDTO = {
       email: 'test@example.com',
-      name: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+      location: 'Test Location',
       password: 'password',
       dateOfBirth: '1990-01-01',
     }

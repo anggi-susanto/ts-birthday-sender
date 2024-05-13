@@ -56,7 +56,7 @@ describe('UpdateUserController', () => {
    */
   it('should update the name of user selected', async () => {
     const updateUserRequestDTO = {
-      name: 'New User',
+      firstName: 'New User',
     }
     const httpRequest: IHttpRequest = {
       path: { id: existingUser.id },

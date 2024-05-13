@@ -23,7 +23,10 @@ describe('CreateUserRouter', () => {
     const response = await request(app).post('/users').send({
       password: '123456',
       email: 'testIntegration@test.com.br',
-      name: 'Test Integration',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
     })
 
     expect(response.status).toBe(201)
@@ -39,13 +42,19 @@ describe('CreateUserRouter', () => {
     await request(app).post('/users').send({
       password: '123456',
       email: 'testIntegrationExisting@test.com.br',
-      name: 'Test Integration Exist User',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
     })
 
     const response = await request(app).post('/users').send({
       password: '123456',
       email: 'testIntegrationExisting@test.com.br',
-      name: 'Test Integration Exist User',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
     })
 
     expect(response.status).toBe(400)
@@ -60,7 +69,10 @@ describe('CreateUserRouter', () => {
     const response = await request(app).post('/users').send({
       password: '123456',
       email: 'Invalid email',
-      name: 'Test Integration Exist User',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
     })
 
     expect(response.status).toBe(400)

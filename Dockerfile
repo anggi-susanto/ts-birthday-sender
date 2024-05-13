@@ -7,6 +7,8 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN npm install -g pnpm
 
+RUN npm install -g husky
+
 RUN pnpm install --production
 
 COPY . .

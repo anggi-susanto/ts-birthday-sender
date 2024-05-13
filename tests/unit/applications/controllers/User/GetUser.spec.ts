@@ -57,14 +57,17 @@ describe('GetUserController', () => {
     const users: IUserOutRequestDTO[] = [
       {
         id: '1',
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        createdAt: new Date(),
+        email: 'test@example.com',
+        firstName: 'Test',
+        lastName: 'User',
+        location: 'Test Location',
         dateOfBirth: '1990-01-01',
       },
       {
         id: '2',
-        name: 'Jane Doe',
+        firstName: 'Jane',
+        lastName: 'Doe',
+        location: 'Test Location',
         email: 'janedoe@example.com',
         createdAt: new Date(),
         dateOfBirth: '1990-01-01',

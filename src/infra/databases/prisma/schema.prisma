@@ -11,7 +11,9 @@ model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   email     String   @unique
-  name      String
+  firstName String
+  lastName  String
+  location  String
   password  String
   dateOfBirth String
   refresh_token RefreshToken[]

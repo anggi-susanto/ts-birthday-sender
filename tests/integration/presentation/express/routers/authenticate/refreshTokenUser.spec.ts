@@ -25,7 +25,10 @@ describe('AuthenticateUserRouter', () => {
     await request(app).post('/users').send({
       password: '123456',
       email: 'AuthenticateUserRouter@test.com.br',
-      name: 'Test Integration Exist User',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
+      dateOfBirth: '1990-01-01',
     })
 
     const response = await request(app).post('/authenticate/login').send({

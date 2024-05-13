@@ -32,7 +32,9 @@ describe('UpdateUserRouter', () => {
     userData = {
       password: '123456',
       email: 'testUpdate@test.com.br',
-      name: 'Test Integration Exist User',
+      firstName: 'Test Integration',
+      lastName: 'Exist User',
+      location: 'Test Location',
       dateOfBirth: '1990-01-01',
     }
 
@@ -85,11 +87,11 @@ describe('UpdateUserRouter', () => {
       .patch(`/users/${userId}`)
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({
-        name: 'Test Integration',
+        firstName: 'Test Integration',
       })
 
     expect(response.status).toBe(200)
-    expect(response.body.name).toBe('Test Integration')
+    expect(response.body.firstName).toBe('Test Integration')
   })
 
   /**
