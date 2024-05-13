@@ -29,7 +29,9 @@
               "examples":{
                 "user":{
                   "value":{
-                    "name": "Anggi Susanto",
+                    "firstName": "Anggi",
+                    "lastName": "Susanto",
+                    "Location": "Asia/Jakarta",
                     "email": "antscpk06@gmail.com",
                     "password": "12345",
                     "dateOfBirth": "2000-01-01"
@@ -68,7 +70,7 @@
                 }
               }
             }
-           }
+          }
         }
       },
       "get":{
@@ -155,7 +157,9 @@
               "examples":{
                 "user":{
                   "value":{
-                    "name": "Anggi Susanto",
+                    "firstName": "Anggi",
+                    "lastName": "Susanto",
+                    "Location": "Asia/Jakarta",
                     "email": "antscpk06@gmail.com",
                     "password": "12345",
                     "dateOfBirth": "2000-01-01"
@@ -194,7 +198,7 @@
                 }
               }
             }
-           }
+          }
         }
       },
       "delete":{
@@ -246,7 +250,7 @@
       "post": {
         "summary": "Login user",
         "description": "This route will responsible for login the user",
-        "tags": ["Authentication"],
+        "tags": ["Auth"],
         "requestBody":{
           "content": {
             "application/json":{
@@ -313,7 +317,13 @@
           "id": {
             "type": "string"
           },
-          "name": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "location": {
             "type": "string"
           },
           "email": {

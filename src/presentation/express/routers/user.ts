@@ -35,7 +35,7 @@ userRoutes.get(
 /**
  * Endpoint to update user information (requires authentication).
  */
-userRoutes.patch(
+userRoutes.put(
   '/:id',
   ensureAuthenticated,
   async (request: Request, response: Response) => {

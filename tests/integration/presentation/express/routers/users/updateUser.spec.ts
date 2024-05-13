@@ -50,7 +50,7 @@ describe('UpdateUserRouter', () => {
    */
   it('Should be able to update password of an existing user', async () => {
     const response = await request(app)
-      .patch(`/users/${userId}`)
+      .put(`/users/${userId}`)
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({
         password: '123',
@@ -67,7 +67,7 @@ describe('UpdateUserRouter', () => {
    */
   it('Should be able to update email of an existing user', async () => {
     const response = await request(app)
-      .patch(`/users/${userId}`)
+      .put(`/users/${userId}`)
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({
         email: 'testUpdated@test.com.br',
@@ -84,7 +84,7 @@ describe('UpdateUserRouter', () => {
    */
   it('Should be able to update name of an existing user', async () => {
     const response = await request(app)
-      .patch(`/users/${userId}`)
+      .put(`/users/${userId}`)
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({
         firstName: 'Test Integration',
@@ -101,7 +101,7 @@ describe('UpdateUserRouter', () => {
    */
   it('Should not be able to update an not existing user', async () => {
     const response = await request(app)
-      .patch('/users/:id')
+      .put('/users/:id')
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({
         email: 'testUpdatedExisting@test.com.br',
@@ -117,7 +117,7 @@ describe('UpdateUserRouter', () => {
    */
   it('Should not be able to update an existing user with invalid email', async () => {
     const response = await request(app)
-      .patch(`/users/${userId}`)
+      .put(`/users/${userId}`)
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({
         email: 'invalid email',
@@ -133,7 +133,7 @@ describe('UpdateUserRouter', () => {
    */
   it('should return 422 response if body parameters are invalid', async () => {
     const response = await request(app)
-      .patch('/users/:id')
+      .put('/users/:id')
       .set('Authorization', `Bearer ${authToken.token}`)
       .send({ test: 'Test' })
 
@@ -147,7 +147,7 @@ describe('UpdateUserRouter', () => {
    */
   it('should return 500 response if an internal server error occurs', async () => {
     const response = await request(app)
-      .patch('/users/:id')
+      .put('/users/:id')
       .set('Authorization', `Bearer ${authToken.token}`)
     expect(response.status).toBe(httpError.error_500().statusCode)
   })
