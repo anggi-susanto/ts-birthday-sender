@@ -51,6 +51,7 @@ describe('RecoverUserInformation', () => {
       findById: vi.fn(),
       findAll: vi.fn(),
       delete: vi.fn(),
+      findNotSentEmails: vi.fn(),
     }
     tokenManager = {
       validateToken: vi.fn(),

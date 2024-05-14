@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 
+import { main } from '../../../workers/birthDay'
 import { authenticateRoutes } from '../routers/authenticate'
 import { documentsRoutes } from '../routers/documentation'
 import { userRoutes } from '../routers/user'
@@ -26,5 +27,7 @@ app.use(express.json())
 app.use('/', documentsRoutes)
 app.use('/users', userRoutes)
 app.use('/authenticate', authenticateRoutes)
+
+main()
 
 export { app }

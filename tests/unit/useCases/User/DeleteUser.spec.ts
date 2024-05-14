@@ -32,6 +32,7 @@ describe('DeleteUser', () => {
       findById: vi.fn(),
       findAll: vi.fn(),
       delete: vi.fn(),
+      findNotSentEmails: vi.fn(),
     }
     deleteUserUseCase = new DeleteUserUseCase(userRepository)
   })

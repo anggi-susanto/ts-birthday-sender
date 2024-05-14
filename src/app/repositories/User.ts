@@ -67,4 +67,11 @@ export interface IUsersRepository {
    * @returns {Promise<void>} A promise that resolves when the user is deleted.
    */
   delete(id: string): Promise<void>
+
+  /**
+   * Retrieves a list of users who have not received an email yet.
+   *
+   * @returns {Promise<IUserOutRequestDTO[]>} A promise that resolves to an array of user objects who have not received an email yet.
+   */
+  findNotSentEmails(): Promise<IUserOutRequestDTO[]>
 }

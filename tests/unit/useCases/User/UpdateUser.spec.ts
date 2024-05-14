@@ -36,6 +36,7 @@ describe('UpdateUserUseCase', () => {
       findById: vi.fn(),
       findAll: vi.fn(),
       delete: vi.fn(),
+      findNotSentEmails: vi.fn(),
     }
     passwordHasher = {
       hashPassword: vi.fn(),

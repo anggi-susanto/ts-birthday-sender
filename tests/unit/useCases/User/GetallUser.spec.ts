@@ -37,6 +37,7 @@ describe('GetAllUserUseCase', () => {
       findById: vi.fn(),
       findAll: vi.fn(),
       delete: vi.fn(),
+      findNotSentEmails: vi.fn(),
     }
     getAllUserUseCase = new GetAllUserUseCase(userRepository)
   })

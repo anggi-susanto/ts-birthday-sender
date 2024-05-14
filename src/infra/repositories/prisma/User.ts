@@ -208,4 +208,29 @@ export class UserRepository implements IUsersRepository {
       },
     })
   }
+
+  /**
+   * Retrieves a list of users who have not received an email yet.
+   *
+   * @return {Promise<IUserOutRequestDTO[]>} A promise that resolves to an array of user objects who have not received an email yet.
+   */
+  async findNotSentEmails(): Promise<IUserOutRequestDTO[]> {
+    const users = await this.prisma.user.findMany({
+      where: {
+        lastEmailSent: null,
+      },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        location: true,
+        createdAt: true,
+        dateOfBirth: true,
+        retryCount: true,
+        lastEmailSent: true,
+      },
+    })
+    return users
+  }
 }
