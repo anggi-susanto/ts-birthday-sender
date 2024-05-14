@@ -66,7 +66,9 @@ describe('UpdateUserUseCase', () => {
       firstName: 'Existing',
       lastName: 'User',
       location: 'Test Location',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      lastEmailSent: new Date(),
+      retryCount: 0,
       password: 'existingpassword',
     }
 
@@ -75,7 +77,9 @@ describe('UpdateUserUseCase', () => {
       firstName: 'New',
       lastName: 'User',
       location: 'Test Location',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      lastEmailSent: new Date(),
+      retryCount: 0,
       password: 'newpassword',
     }
     userRepository.findById = vi
@@ -110,7 +114,9 @@ describe('UpdateUserUseCase', () => {
       firstName: 'Test',
       lastName: 'User',
       location: 'Test Location',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      lastEmailSent: new Date(),
+      retryCount: 0,
       password: 'password',
     }
 
@@ -142,7 +148,9 @@ describe('UpdateUserUseCase', () => {
       firstName: 'Test',
       lastName: 'User',
       location: 'Test Location',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      lastEmailSent: new Date(),
+      retryCount: 0,
       password: 'password',
     }
 

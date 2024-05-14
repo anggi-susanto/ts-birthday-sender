@@ -34,7 +34,8 @@
                     "Location": "Asia/Jakarta",
                     "email": "antscpk06@gmail.com",
                     "password": "12345",
-                    "dateOfBirth": "2000-01-01"
+                    "dateOfBirth": "2000-01-01",
+                    "retryCount": 0
                   }
                 }
               }
@@ -162,7 +163,9 @@
                     "Location": "Asia/Jakarta",
                     "email": "antscpk06@gmail.com",
                     "password": "12345",
-                    "dateOfBirth": "2000-01-01"
+                    "dateOfBirth": "2000-01-01",
+                    "retryCount": 0,
+                    "lastEmailSent": "2022-01-01"
                   }
                 }
               }
@@ -337,8 +340,16 @@
             "format": "date-time"
           },
           "dateOfBirth": {
-            "type": "string",
+            "type": "date-time",
             "format": "date"
+          },
+          "retryCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastEmailSent": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },

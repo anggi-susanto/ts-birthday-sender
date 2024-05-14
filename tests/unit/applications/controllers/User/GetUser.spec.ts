@@ -61,7 +61,9 @@ describe('GetUserController', () => {
         firstName: 'Test',
         lastName: 'User',
         location: 'Test Location',
-        dateOfBirth: '1990-01-01',
+        dateOfBirth: new Date('1990-01-01'),
+        lastEmailSent: new Date(),
+        retryCount: 0,
       },
       {
         id: '2',
@@ -70,7 +72,9 @@ describe('GetUserController', () => {
         location: 'Test Location',
         email: 'janedoe@example.com',
         createdAt: new Date(),
-        dateOfBirth: '1990-01-01',
+        dateOfBirth: new Date('1990-01-01'),
+        lastEmailSent: new Date(),
+        retryCount: 0,
       },
     ]
     const total = users.length

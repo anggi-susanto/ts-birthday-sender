@@ -26,7 +26,9 @@ describe('RefreshTokenPrismaRepository', () => {
     lastName: 'User',
     location: 'Test Location',
     password: 'password',
-    dateOfBirth: '1990-01-01',
+    dateOfBirth: new Date('1990-01-01'),
+    retryCount: 0,
+    lastEmailSent: new Date(),
   }
 
   /**

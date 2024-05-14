@@ -13,7 +13,9 @@ export interface UserInterface {
   location: string
   email: Email
   password: string
-  dateOfBirth: string
+  dateOfBirth: Date
+  lastEmailSent?: Date
+  retryCount?: number
 }
 
 /**
@@ -27,7 +29,9 @@ export class User {
   private _location: string
   private _email: Email
   private _password: string
-  private _dateOfBirth: string
+  private _dateOfBirth: Date
+  private _lastEmailSent?: Date
+  private _retryCount?: number
 
   /**
    * Creates a new user instance based on the provided data.
@@ -120,8 +124,26 @@ export class User {
    * @readonly
    */
 
-  get dateOfBirth(): string {
+  get dateOfBirth(): Date {
     return this._dateOfBirth
+  }
+
+  /**
+   * Gets the user's last email sent.
+   *
+   * @readonly
+   */
+  get lastEmailSent(): Date | undefined {
+    return this._lastEmailSent
+  }
+
+  /**
+   * Gets the user's retry count.
+   *
+   * @readonly
+   */
+  get retryCount(): number | undefined {
+    return this._retryCount
   }
 
   /**
@@ -137,5 +159,7 @@ export class User {
     this._password = props.password
     this._email = props.email
     this._dateOfBirth = props.dateOfBirth
+    this._lastEmailSent = props.lastEmailSent
+    this._retryCount = props.retryCount
   }
 }

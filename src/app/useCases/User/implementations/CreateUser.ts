@@ -39,6 +39,8 @@ export class CreateUserUseCase implements ICreateUserUseCase {
     location,
     password,
     dateOfBirth,
+    retryCount,
+    lastEmailSent,
   }: ICreateUserRequestDTO): Promise<ResponseDTO> {
     try {
       const userEntity = User.create({
@@ -48,6 +50,8 @@ export class CreateUserUseCase implements ICreateUserUseCase {
         location,
         password,
         dateOfBirth,
+        retryCount,
+        lastEmailSent,
       })
 
       const userAlreadyExists = await this.userRepository.findByEmail(
@@ -68,7 +72,8 @@ export class CreateUserUseCase implements ICreateUserUseCase {
         lastName: userEntity.lastName,
         location: userEntity.location,
         password: passwordHashed,
-        dateOfBirth: '1990-01-01',
+        dateOfBirth: new Date('1990-01-01'),
+        retryCount: 0,
       })
 
       return { data: user, success: true }

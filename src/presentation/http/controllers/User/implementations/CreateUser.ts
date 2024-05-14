@@ -51,7 +51,9 @@ export class CreateUserController implements IController {
           location: string
           email: string
           password: string
-          dateOfBirth: string
+          dateOfBirth: Date
+          retryCount?: number
+          lastEmailSent?: Date
         }
 
         // Execute the create user use case

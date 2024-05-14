@@ -32,5 +32,15 @@ export interface ICreateUserRequestDTO {
   /**
    * The date of birth of the user.
    */
-  dateOfBirth: string
+  dateOfBirth: Date
+
+  /**
+   * The retry count of the user.
+   */
+  retryCount?: number
+
+  /**
+   * The last email sent of the user.
+   */
+  lastEmailSent?: Date
 }

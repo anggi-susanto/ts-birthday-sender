@@ -22,7 +22,9 @@ describe('UserPrismaRepository', () => {
     lastName: 'Exist User',
     location: 'Test Location',
     password: 'password',
-    dateOfBirth: '1990-01-01',
+    dateOfBirth: new Date('1990-01-01'),
+    retryCount: 0,
+    lastEmailSent: new Date(),
   }
 
   /**
@@ -107,6 +109,8 @@ describe('UserPrismaRepository', () => {
         location: true,
         createdAt: true,
         dateOfBirth: true,
+        retryCount: true,
+        lastEmailSent: true,
       },
     })
     const paginatedData = await userRepository.findAll(1)
@@ -128,14 +132,16 @@ describe('UserPrismaRepository', () => {
       firstName: 'New User',
       lastName: 'Updated',
       location: 'Updated Location',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
       password: '123',
+      retryCount: 0,
+      lastEmailSent: new Date(),
     })
 
     expect(user.firstName).toEqual('New User')
     expect(user.lastName).toEqual('Updated')
     expect(user.location).toEqual('Updated Location')
-    expect(user.dateOfBirth).toEqual('1990-01-01')
+    expect(user.dateOfBirth).toEqual(new Date('1990-01-01'))
   })
 
   /**

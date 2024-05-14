@@ -56,7 +56,9 @@ describe('CreateUserController', () => {
       lastName: 'User',
       location: 'Test Location',
       password: 'password',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      retryCount: 0,
+      lastEmailSent: new Date(),
     }
     const httpRequest: IHttpRequest = {
       body: createUserRequestDTO,
@@ -111,7 +113,7 @@ describe('CreateUserController', () => {
       lastName: 'User',
       location: 'Test Location',
       password: 'password',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
     }
     const httpRequest: IHttpRequest = {
       body: createUserRequestDTO,

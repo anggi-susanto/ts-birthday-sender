@@ -22,7 +22,9 @@ describe('UserRouter', () => {
     firstName: 'Test Integration',
     lastName: 'Exist User',
     location: 'Test Location',
-    dateOfBirth: '1990-01-01',
+    dateOfBirth: new Date('1990-01-01'),
+    retryCount: 0,
+    lastEmailSent: new Date(),
   }
   let authToken: any
 

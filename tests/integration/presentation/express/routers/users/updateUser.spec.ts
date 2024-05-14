@@ -35,7 +35,7 @@ describe('UpdateUserRouter', () => {
       firstName: 'Test Integration',
       lastName: 'Exist User',
       location: 'Test Location',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
     }
 
     const responseUser = await request(app).post('/users').send(userData)

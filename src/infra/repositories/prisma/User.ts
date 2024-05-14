@@ -54,6 +54,8 @@ export class UserRepository implements IUsersRepository {
         location: true,
         createdAt: true,
         dateOfBirth: true,
+        retryCount: true,
+        lastEmailSent: true,
       },
     })
 
@@ -78,6 +80,9 @@ export class UserRepository implements IUsersRepository {
         location: true,
         password: true,
         createdAt: true,
+        dateOfBirth: true,
+        retryCount: true,
+        lastEmailSent: true,
       },
     })
 
@@ -103,6 +108,8 @@ export class UserRepository implements IUsersRepository {
         password: true,
         createdAt: true,
         dateOfBirth: true,
+        retryCount: true,
+        lastEmailSent: true,
       },
     })
 
@@ -132,6 +139,8 @@ export class UserRepository implements IUsersRepository {
         location: true,
         createdAt: true,
         dateOfBirth: true,
+        retryCount: true,
+        lastEmailSent: true,
       },
     })
 
@@ -155,7 +164,16 @@ export class UserRepository implements IUsersRepository {
    */
   async update(
     user: IUserOutRequestDTO,
-    { email, firstName, lastName, location, password }: IUpdateUserRequestDTO,
+    {
+      email,
+      firstName,
+      lastName,
+      location,
+      password,
+      dateOfBirth,
+      retryCount,
+      lastEmailSent,
+    }: IUpdateUserRequestDTO,
   ): Promise<IUserOutRequestDTO> {
     const userUpdated = await this.prisma.user.update({
       where: {
@@ -167,6 +185,9 @@ export class UserRepository implements IUsersRepository {
         lastName,
         location,
         password,
+        dateOfBirth,
+        retryCount,
+        lastEmailSent,
       },
     })
 

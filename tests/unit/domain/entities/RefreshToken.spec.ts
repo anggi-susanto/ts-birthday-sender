@@ -22,7 +22,9 @@ describe('RefreshToken', () => {
     location: 'Test Location',
     email: new Email({ address: 'john@example.com' }),
     password: 'password123',
-    dateOfBirth: '1990-01-01',
+    dateOfBirth: new Date('1990-01-01'),
+    lastEmailSent: new Date(),
+    retryCount: 0,
   })
 
   // Properties for the RefreshToken instance

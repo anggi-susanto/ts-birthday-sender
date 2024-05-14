@@ -37,5 +37,15 @@ export interface IUpdateUserRequestDTO {
   /**
    * The updated date of birth of the user.
    */
-  dateOfBirth?: string
+  dateOfBirth?: Date
+
+  /**
+   * The updated retry count of the user.
+   */
+  retryCount?: number
+
+  /**
+   * The updated last email sent of the user.
+   */
+  lastEmailSent?: Date
 }

@@ -15,7 +15,9 @@ model User {
   lastName  String
   location  String
   password  String
-  dateOfBirth String
+  dateOfBirth DateTime
+  lastEmailSent DateTime?
+  retryCount  Int @default(0)
   refresh_token RefreshToken[]
 
   @@map("users")

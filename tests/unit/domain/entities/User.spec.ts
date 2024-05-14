@@ -26,12 +26,13 @@ describe('User Class', () => {
       location: 'Test Location',
       email: new Email({ address: 'john@example.com' }),
       password: 'password123',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      retryCount: 0,
     })
     expect(user.firstName).toBe('John')
     expect(user.lastName).toBe('Doe')
     expect(user.location).toBe('Test Location')
-    expect(user.dateOfBirth).toBe('1990-01-01')
+    expect(user.dateOfBirth).toStrictEqual(new Date('1990-01-01'))
     expect(user.email.address).toBe('john@example.com')
     expect(user.password).toBe('password123')
   })
@@ -48,13 +49,14 @@ describe('User Class', () => {
       location: 'Test Location',
       email: 'jane.doe@example.com',
       password: '654321',
-      dateOfBirth: '1990-01-01',
+      dateOfBirth: new Date('1990-01-01'),
+      retryCount: 0,
     })
 
     expect(user.firstName).toBe('Jane')
     expect(user.lastName).toBe('Doe')
     expect(user.location).toBe('Test Location')
-    expect(user.dateOfBirth).toBe('1990-01-01')
+    expect(user.dateOfBirth).toStrictEqual(new Date('1990-01-01'))
     expect(user.email.address).toBe('jane.doe@example.com')
     expect(user.password).toBe('654321')
   })

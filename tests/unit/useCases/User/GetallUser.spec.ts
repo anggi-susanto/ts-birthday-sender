@@ -64,7 +64,9 @@ describe('GetAllUserUseCase', () => {
         location: 'New York, USA',
         email: 'johndoe@example.com',
         createdAt: new Date(),
-        dateOfBirth: new Date().toDateString(),
+        dateOfBirth: new Date('1990-01-01'),
+        lastEmailSent: new Date(),
+        retryCount: 0,
       },
       {
         id: '2',
@@ -73,7 +75,9 @@ describe('GetAllUserUseCase', () => {
         location: 'New York, USA',
         email: 'janedoe@example.com',
         createdAt: new Date(),
-        dateOfBirth: new Date().toDateString(),
+        dateOfBirth: new Date('1990-01-01'),
+        lastEmailSent: new Date(),
+        retryCount: 0,
       },
     ]
     const total = users.length
