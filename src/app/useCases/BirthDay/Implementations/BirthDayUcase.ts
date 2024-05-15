@@ -31,7 +31,6 @@ export class BirthDayUseCase implements IBirthDayUseCase {
     try {
       console.log("initialize to schedule all birthday's email")
       await this.generateSchedule(1)
-      console.log("finished to schedule all birthday's email")
     } catch (error: any) {
       console.log(error)
     }
@@ -63,16 +62,25 @@ export class BirthDayUseCase implements IBirthDayUseCase {
    * @return {Promise<void>} - A promise that resolves when the birthday email is scheduled.
    */
   async scheduleBirthdayEmail(user: IUserOutRequestDTO) {
+    const now = new Date()
     const timeZone = user.location
     const birthday = moment(user.dateOfBirth)
       .tz(timeZone)
       .startOf('day')
-      .add(9, 'hours')
       .toDate()
 
-    schedule.scheduleJob(birthday, async () => {
+    const nextBirthday = new Date(
+      now.getFullYear().toString() +
+        '-' +
+        birthday.getMonth().toString() +
+        '-' +
+        birthday.getDate().toString(),
+    )
+
+    const scheduleTime = moment(nextBirthday).add(9, 'hours').toDate()
+
+    schedule.scheduleJob(scheduleTime, async () => {
       const fullName = `${user.firstName} ${user.lastName}`
-      const now = new Date()
 
       if (
         user.lastEmailSent &&
@@ -88,7 +96,8 @@ export class BirthDayUseCase implements IBirthDayUseCase {
           retryCount: 0,
         })
       } else {
-        await this.handleRetry(user)
+        console.log('failed to send email, retrying...')
+        await this.handleRetry(user, this.userRepository)
       }
     })
   }
@@ -99,31 +108,33 @@ export class BirthDayUseCase implements IBirthDayUseCase {
    * @param {IUserOutRequestDTO} user - The user object containing the necessary information for sending the email.
    * @return {Promise<void>} - A promise that resolves when the retry logic is completed.
    */
-  async handleRetry(user: IUserOutRequestDTO) {
+  async handleRetry(user: IUserOutRequestDTO, repo: IUsersRepository) {
     if (
-      user.retryCount &&
-      user.retryCount < Number(process.env.MAX_RETRY_COUNT)
+      user.retryCount !== undefined &&
+      process.env.MAX_RETRY_COUNT &&
+      user.retryCount < parseInt(process.env.MAX_RETRY_COUNT)
     ) {
-      schedule.scheduleJob(moment().add(1, 'hour').toDate(), async () => {
+      schedule.scheduleJob(moment().add(1, 'second').toDate(), async () => {
         const fullName = `${user.firstName} ${user.lastName}`
         const now = new Date()
+
         const success = await sendEmail(fullName, user.email)
 
         if (success) {
-          await this.userRepository.update(user, {
+          await repo.update(user, {
             lastEmailSent: now,
             retryCount: 0,
           })
         } else {
-          await this.userRepository.update(user, {
+          await repo.update(user, {
             lastEmailSent: now,
             retryCount: user.retryCount ? user.retryCount + 1 : 1,
           })
-          this.handleRetry(user)
+          this.handleRetry(user, repo)
         }
       })
     } else {
-      await this.userRepository.update(user, {
+      await repo.update(user, {
         firstName: user.firstName,
         lastName: user.lastName,
         retryCount: 0,
@@ -139,7 +150,9 @@ export class BirthDayUseCase implements IBirthDayUseCase {
   async retryAllUnsentEmails(): Promise<void> {
     console.log("initialize retry birthday's email")
     const unsentUsers = await this.userRepository.findNotSentEmails()
-    unsentUsers.forEach(this.handleRetry)
+    unsentUsers.forEach((value: IUserOutRequestDTO) => {
+      this.handleRetry(value, this.userRepository)
+    })
   }
 
   /**
@@ -151,7 +164,6 @@ export class BirthDayUseCase implements IBirthDayUseCase {
   async dailyBirthdayCheck(): Promise<void> {
     console.log("initialize daily birthday's email")
     await this.processDaily(1)
-    console.log("finished daily birthday's email")
   }
 
   /**

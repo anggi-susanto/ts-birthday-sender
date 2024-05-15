@@ -1,7 +1,8 @@
 import cors from 'cors'
 import express from 'express'
+import schedule from 'node-schedule'
 
-import { main } from '../../../workers/birthDay'
+import { birthDayComposer } from '../../../infra/services/composers/BirthDay/birthDay'
 import { authenticateRoutes } from '../routers/authenticate'
 import { documentsRoutes } from '../routers/documentation'
 import { userRoutes } from '../routers/user'
@@ -28,6 +29,19 @@ app.use('/', documentsRoutes)
 app.use('/users', userRoutes)
 app.use('/authenticate', authenticateRoutes)
 
-main()
+// Run the allBirthday function to send out birthday reminders for the current day
+birthDayComposer().scheduleAllBirthDay()
+
+// Run the retryAllUnsentEmails function to resend any unsent birthday emails
+birthDayComposer().retryAllUnsentEmails()
+
+// Schedule a recurring job to run daily at midnight
+schedule.scheduleJob('0 0 * * *', async () => {
+  // Run the dailyBirthdayCheck function to check for upcoming birthdays
+  birthDayComposer().dailyBirthdayCheck()
+
+  // Run the retryAllUnsentEmails function to resend any unsent birthday emails
+  birthDayComposer().retryAllUnsentEmails()
+})
 
 export { app }

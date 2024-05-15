@@ -99,6 +99,7 @@ describe('UpdateUserUseCase', () => {
       location: existingUser.location,
       email: existingUser.email,
       password: existingUser.password,
+      dateOfBirth: existingUser.dateOfBirth,
     })
   })
 
